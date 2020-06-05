@@ -8,9 +8,7 @@
     <div class="content">
       <div class="container-fluid">
         
-        <div>
-          <textarea  name="" id="editor" cols="30" rows="10"></textarea>
-        </div>
+        
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

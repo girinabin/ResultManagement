@@ -22,5 +22,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard','DashboardController@index')->name('dashboard');
-
-Route::get('/test','DashboardController@test'); 
+// Route::post('/addclass','DashboardController@addClass')->name('addclass');
+Route::resource('school', 'SchoolController');

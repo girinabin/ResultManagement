@@ -24,7 +24,14 @@
     $('#table_id').DataTable();
     } );
   </script>
-  
+  <script>
+    $(document).ready(()=>{
+    setTimeout(()=>{
+    $('.alert').slideUp()
+    },4000);
+    });
+  </script>
+
 </body>
 
 </html>

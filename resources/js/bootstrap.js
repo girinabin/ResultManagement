@@ -8,7 +8,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-    $(document).ready(function(){
+    $(document).ready(()=>{
         ClassicEditor
         .create( document.querySelector( '#editor' ) )
         .catch( error => {

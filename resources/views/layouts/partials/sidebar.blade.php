@@ -47,14 +47,23 @@
               </li>
             </ul>
           </li> --}}
-          <li class="nav-item">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-school"></i>
               <p>
                 School
-                
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('school.create') }}"
+                 class="nav-link  {{route('school.create')?'active':''}}" >
+                  <i class="fas fa-add"></i>
+                  <p>Add School</p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
