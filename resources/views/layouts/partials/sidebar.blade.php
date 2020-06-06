@@ -58,9 +58,14 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('school.create') }}"
-                 class="nav-link  {{route('school.create')?'active':''}}" >
-                  <i class="fas fa-add"></i>
+                 class="nav-link  {{url()->current()=='http://resultmanagement.test/school/create' ?'active':'' }}" >
+                  <i class="fas fa-plus"></i>
                   <p>Add School</p>
+                </a>
+                <a href="{{ route('school.index') }}"
+                 class="nav-link  {{ url()->current()=='http://resultmanagement.test/school' ?'active':'' }}" >
+                  <i class="fas fa-eye"></i>
+                  <p>View School</p>
                 </a>
               </li>
             </ul>

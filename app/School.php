@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class School extends Model
 {
     protected $guarded =[];
-    public function schoolClasses()
+
+    public function classes()
     {
-        return $this->belongsToMany(SchoolClass::class,'school_school_class');
+        return $this->hasMany(SchoolClass::class,'school_id');
     }
+   
 }

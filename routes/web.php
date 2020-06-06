@@ -24,3 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard','DashboardController@index')->name('dashboard');
 // Route::post('/addclass','DashboardController@addClass')->name('addclass');
 Route::resource('school', 'SchoolController');
+// CLASSES
+Route::post('/school/class/{id}','SchoolController@addClass')->name('school.class');
+Route::post('/update/class/{id}','SchoolController@updateClass')->name('update.class');
+Route::post('/class/delete/{id}','SchoolController@deleteClass')->name('delete.class');
+

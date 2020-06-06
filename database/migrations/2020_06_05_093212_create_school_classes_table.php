@@ -15,7 +15,9 @@ class CreateSchoolClassesTable extends Migration
     {
         Schema::create('school_classes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('school_id')->index();
             $table->string('name');
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('CASCADE');
             $table->timestamps();
         });
     }
