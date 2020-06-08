@@ -102,7 +102,8 @@ class SchoolController extends Controller
      */
     public function show(School $school)
     {
-        $classes = SchoolClass::all();
+        $classes = SchoolClass::where('school_id',$school->id)->get();
+
         return view('backend.school.show',compact('school','classes'));
         
     }
@@ -147,6 +148,12 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        dd($school);
+        
+        $result = School::where(['id'=>$school->id])->delete();
+        if($result)
+        {
+            return redirect()->back()->with('success_message','School Deleted!');
+        }
+
     }
 }

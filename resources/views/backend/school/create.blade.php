@@ -4,9 +4,12 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
+
                 <div class="col-md-6 offset-3">
                     <div class="card">
                         <div class="card-header">
+                {{-- <button type="button" class="btn btn-default backlink float-right"> <i class="fa fa-backward" > </i> Back</button> --}}
+
                             <p class="card-text text-center"><strong>Add School Details</strong></p>
                         </div>
                         <div class="card-body">

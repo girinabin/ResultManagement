@@ -29,3 +29,11 @@ Route::post('/school/class/{id}','SchoolController@addClass')->name('school.clas
 Route::post('/update/class/{id}','SchoolController@updateClass')->name('update.class');
 Route::post('/class/delete/{id}','SchoolController@deleteClass')->name('delete.class');
 
+// STUDENTS
+// Route::resource('student', 'SchoolController');
+Route::get('/student/{class}','StudentController@index')->name('student.index');
+Route::post('student/{class}','StudentController@store')->name('add.student');
+Route::post('/student/update/{student}','StudentController@update')->name('update.student');
+Route::post('/student/delete/{student}','StudentController@destroy')->name('delete.student');
+
+
