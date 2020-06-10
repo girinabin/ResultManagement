@@ -9,12 +9,30 @@
                     {{ Session::get('success_message')}}
                 </div>
                 @endif
+                @if(Session::has('error_message'))
+                <div class="alert alert-danger col-md-3 offset-9" role="alert">
+                    {{ Session::get('error_message')}}
+                </div>
+                @endif
 
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-sm badge-info" data-toggle="modal"
                                 data-target=".bd-student-modal-lg{{ $class->id }}">Add Student</button>
+                                <div class="float-right " >
+                                    <form action="{{ route('import.student',$class->id) }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group">
+                                            <div class="text text-danger">{{ $errors->first('file') }}</div>
+                                            <input type="file" name="file" class="form-control">
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-sm badge-info">Import Student</button>
+                                    </form> 
+                                    <a href="{{ asset('uploads/sample/students.xlsx') }}" class="float-right">Download Sample</a>
+                                </div>
+                               
                             <p class="card-text text-center"><strong>{{ ucfirst($class->name) }}'s Student List</strong>
                             </p>
                         </div>

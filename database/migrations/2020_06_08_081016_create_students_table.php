@@ -20,7 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('symbol_no')->unique();
             $table->string('name');
             $table->string('father_name');
-            $table->date('dob');
+            $table->string('dob');
             $table->foreign('class_id')->references('id')->on('school_classes')->onDelete('CASCADE');
             
             $table->timestamps();

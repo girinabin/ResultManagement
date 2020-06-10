@@ -5,9 +5,51 @@ namespace App\Http\Controllers;
 use App\SchoolClass;
 use App\Student;
 use Illuminate\Http\Request;
+use Importer;
 
 class StudentController extends Controller
 {
+
+    public function importExcel(Request $request,SchoolClass $class)
+    {
+        $request->validate([
+            'file'=>'required|max:5000|mimes:xls,xlsx,csv'
+        ]);
+            $students = $request->hasFile('file');
+            if($students)
+            {
+                $dateTime = date('Ymd_His');
+                $file = $request->file('file');
+                $fileName = $dateTime .'-'.$file->getClientOriginalName();
+                $savepath = public_path('/uploads/student/');
+                $file->move($savepath,$fileName);
+                $excel = Importer::make('Excel');
+                $excel->load($savepath.$fileName);
+                $collection = $excel->getCollection();
+                if($collection[0][0]=="Batch" && $collection[0][1]=="SymbolNo" && $collection[0][2]=="Name" && $collection[0][3]=="Father's Name" && $collection[0][4]=="Dob")
+                {
+                    for($row=1;$row<sizeof($collection);$row++)
+                {
+                    $class->students()->create([
+                        'batch'=>$collection[$row][0],
+                        'symbol_no'=>$collection[$row][1],
+                        'name'=>$collection[$row][2],
+                        'father_name'=>$collection[$row][3],
+                        'dob'=>$collection[$row][4],
+                        'class_id'=>1
+                    ]);
+                }
+                 return redirect()->back()->with('success_message','Imported Successfully!');
+
+                }else{
+                    return redirect()->back()->with('error_message','Excel file not Match with Sample given');
+                }
+                
+
+
+            }
+        
+    }
     /**
      * Display a listing of the resource.
      *

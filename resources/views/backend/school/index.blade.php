@@ -88,7 +88,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="badge badge-info">Delete School {{ ucfirst($school->school_name) }}</span>
+                <span class="badge badge-info">{{ ucfirst($school->school_name) }}</span>
                 <button type="button" class="close btn btn-sm" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

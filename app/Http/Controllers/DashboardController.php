@@ -17,14 +17,15 @@ class DashboardController extends Controller
     //        print_r($class->name);
     //    } 
         
-        return view('backend.dashboard.index');
+        $schools = School::all();
+        return view('backend.dashboard.index',compact('schools'));
     }
 
     public function addClass(Request $request)
     {
-        $school = School::find(2);
-        $sclass = SchoolClass::create(['name'=>$request->name]);
-        $school->schoolClasses()->syncWithOutDetaching($sclass);
-        return redirect()->back();
+        // $school = School::find(2);
+        // $sclass = SchoolClass::create(['name'=>$request->name]);
+        // $school->schoolClasses()->syncWithOutDetaching($sclass);
+        // return redirect()->back();
     }
 }
