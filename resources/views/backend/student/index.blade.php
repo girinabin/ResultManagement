@@ -18,24 +18,46 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" class="btn btn-sm badge-info" data-toggle="modal"
-                                data-target=".bd-student-modal-lg{{ $class->id }}">Add Student</button>
-                                <div class="float-right " >
-                                    <form action="{{ route('import.student',$class->id) }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="form-group">
-                                            <div class="text text-danger">{{ $errors->first('file') }}</div>
-                                            <input type="file" name="file" class="form-control">
-                                        </div>
-                                        
-                                        <button type="submit" class="btn btn-sm badge-info">Import Student</button>
-                                    </form> 
-                                    <a href="{{ asset('uploads/sample/students.xlsx') }}" class="float-right">Download Sample</a>
-                                </div>
-                               
-                            <p class="card-text text-center"><strong>{{ ucfirst($class->name) }}'s Student List</strong>
-                            </p>
+                            <div class="float-left ">
+                                <form action="{{ route('import.student',$class->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <div class="text text-danger">{{ $errors->first('file') }}</div>
+                                        <input type="file" name="file" class="form-control">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-sm badge-info">Import Marks</button>
+                                </form>
+                                <a href="{{ asset('uploads/sample/students.xlsx') }}" class="float-right">Download
+                                    {{ ucfirst($class->name) }} Marks Sample</a>
+                            </div>
+                            
+
+                            <div class="float-right ">
+                                <form action="{{ route('import.student',$class->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <div class="text text-danger">{{ $errors->first('file') }}</div>
+                                        <input type="file" name="file" class="form-control">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-sm badge-info">Import Student</button>
+                                </form>
+                                <a href="{{ asset('uploads/sample/students.xlsx') }}" class="float-right">Download
+                                    Student Sample</a>
+                            </div>
+                            <div class="text-center">
+                                <p class="card-text "><strong>{{ ucfirst($class->name) }}'s Student List</strong>
+                                </p>
+                                <button type="button" class="btn btn-sm badge-info " data-toggle="modal"
+                                    data-target=".bd-student-modal-lg{{ $class->id }}">Add Student</button>
+                            </div>
+                            
                         </div>
+                        
+                        
                         <div class="card-body">
                             <table class="table table-hover table-stripped" id="table_id">
                                 <thead>
@@ -80,12 +102,14 @@
                                                                 class="fas fa-eye  btn-warning btn-sm">&nbsp;View</i></button>
                                                     </form>
 
-                                                    
-                                                        <button data-toggle="modal" data-target=".bd-delete-modal-sm{{$student->id  }}" type="button" class="mt-2  mb-2  dropdown-item"
-                                                            title="Delete"><i
-                                                                class="fas fa-trash  btn-danger btn-sm">&nbsp;Delete</i></button>
-                                                               
-                                                  
+
+                                                    <button data-toggle="modal"
+                                                        data-target=".bd-delete-modal-sm{{$student->id  }}"
+                                                        type="button" class="mt-2  mb-2  dropdown-item"
+                                                        title="Delete"><i
+                                                            class="fas fa-trash  btn-danger btn-sm">&nbsp;Delete</i></button>
+
+
 
                                                 </div>
                                             </div>
