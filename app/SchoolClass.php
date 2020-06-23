@@ -16,5 +16,10 @@ class SchoolClass extends Model
     {
         return $this->hasMany(Student::class,'class_id');
     }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class,'class_id');
+    }
     
 }

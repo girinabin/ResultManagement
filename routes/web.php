@@ -36,5 +36,9 @@ Route::post('student/{class}','StudentController@store')->name('add.student');
 Route::post('/student/update/{student}','StudentController@update')->name('update.student');
 Route::post('/student/delete/{student}','StudentController@destroy')->name('delete.student');
 Route::post('/import/students/{class}','StudentController@importExcel')->name('import.student');
+Route::get('/student/view/{student}','StudentController@show')->name('student.show');
+
+// Student Result
+Route::post('/import/result/{class}','ResultController@importResult')->name('import.result');
 
 

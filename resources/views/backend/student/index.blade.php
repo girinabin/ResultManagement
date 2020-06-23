@@ -19,12 +19,12 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-left ">
-                                <form action="{{ route('import.student',$class->id) }}" method="POST"
+                                <form action="{{ route('import.result',$class->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <div class="text text-danger">{{ $errors->first('file') }}</div>
-                                        <input type="file" name="file" class="form-control">
+                                        <div class="text text-danger">{{ $errors->first('resultfile') }}</div>
+                                        <input type="file" name="resultfile" class="form-control">
                                     </div>
 
                                     <button type="submit" class="btn btn-sm badge-info">Import Marks</button>
@@ -95,7 +95,7 @@
                                                         title="Edit"><i
                                                             class="fas fa-edit btn-success btn-sm">&nbsp;Edit</i></button>
 
-                                                    <form action="">
+                                                    <form action="{{ route('student.show',$student->id) }}">
                                                         @csrf
                                                         <button type="submit" class="mt-2  mb-2  dropdown-item"
                                                             title="Delete"><i

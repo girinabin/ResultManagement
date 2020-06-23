@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\SchoolClass;
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Importer;
 
 class StudentController extends Controller
@@ -36,7 +37,7 @@ class StudentController extends Controller
                         'name'=>$collection[$row][2],
                         'father_name'=>$collection[$row][3],
                         'dob'=>$collection[$row][4],
-                        'class_id'=>1
+                        // 'class_id'=>1
                     ]);
                 }
                  return redirect()->back()->with('success_message','Imported Successfully!');
@@ -103,9 +104,25 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student)
     {
-        //
+        $results = $student->sclass->results;
+        foreach($results as $result){
+            if($result->studentresults['symbol_no']==$student->symbol_no){
+                $res[] = $result;
+            }
+        }
+        foreach($res as $re){
+            $rest[] = $re->studentresults;
+        }
+        foreach($rest as $key=>$value){
+            $rest[$key] =(object) $value;
+        }
+       
+        $resultss =  json_decode(json_encode($rest),true);
+        $results = array_shift($resultss);
+       
+        return view('backend.student.show',compact('student','resultss'));
     }
 
     /**
