@@ -11,6 +11,8 @@ class ResultController extends Controller
 {
     public function importResult(Request $request,SchoolClass $class)
     {
+        $subjectcount = count($class->subjects);
+        
 
         $request->validate([
             'resultfile'=>'required|max:5000|mimes:xls,xlsx,csv'
@@ -28,26 +30,31 @@ class ResultController extends Controller
                 $collections = $excel->getCollection();
                 $checkcollection = $excel->getCollection();
 
-                $collectn = $collections->shift();
+                $keys = $collections->shift();
+                $excelcount = count($keys)-1;
                 $collections = $collections->all();
+                // dd(count($keys));
+                dd($subjectcount,$excelcount);
+                dd( $subjectcount == $excelcount-1);
                 
-                if($checkcollection[0][0]=="SymbolNo")
+                if($checkcollection[0][0]=="SymbolNo" && $subjectcount==$excelcount-1)
                 {
-                    foreach($collections as  $collection){
-                        foreach($collection as $index=>$coll){
-                            $class->results()->create([
-                                'studentresults'=>[
-                                    
-                                    $collectn[$index]=>$coll,
-                                    'symbol_no'=>$collection[0]
-                                  
-                                ]
-                            ]); 
-                        }
+                    dd('here');
+                    
+                    foreach($collections as $key=>$collection){
                         
-                           
+                        $class->results()->create([
+                            'studentresults'=>[
+                                array_combine($keys,$collection)
+
+                            ]
+                        ]);
                         
-                        
+
+
+
+
+
                     }
                  return redirect()->back()->with('success_message','Imported Successfully!');
 

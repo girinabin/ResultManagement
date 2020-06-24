@@ -21,5 +21,10 @@ class SchoolClass extends Model
     {
         return $this->hasMany(Result::class,'class_id');
     }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class,'class_id');
+    }
     
 }

@@ -106,23 +106,30 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        $results = $student->sclass->results;
-        foreach($results as $result){
-            if($result->studentresults['symbol_no']==$student->symbol_no){
-                $res[] = $result;
+        $subjects = $student->sclass->subjects;
+        
+
+        $marks = $student->sclass->results;
+        foreach($marks as $mark){
+            if($mark->studentresults[0]['SymbolNo']==$student->symbol_no){
+                $marks = $mark->studentresults;
             }
         }
-        foreach($res as $re){
-            $rest[] = $re->studentresults;
+        $final = $marks[0];
+        unset($final['SymbolNo']);
+
+        
+        
+        $total = 0;
+        // $total +=$final
+        foreach($final as $key=>$f)
+        {
+            $total +=$f;
         }
-        foreach($rest as $key=>$value){
-            $rest[$key] =(object) $value;
-        }
+        // dd($total);
+    
        
-        $resultss =  json_decode(json_encode($rest),true);
-        $results = array_shift($resultss);
-       
-        return view('backend.student.show',compact('student','resultss'));
+        return view('backend.student.show',compact('student','final','total','subjects'));
     }
 
     /**

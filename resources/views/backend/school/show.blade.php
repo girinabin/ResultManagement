@@ -85,7 +85,8 @@
                         </div>
                         <div class="card-body text-center">
 
-
+                            <a href="{{ route('subject.index',$class->id) }}" class="btn btn-primary btn-sm ">View
+                                Subject</a>
                             <a href="{{ route('student.index',$class->id) }}" class="btn btn-primary btn-sm ">View
                                 Students</a>
                         </div>

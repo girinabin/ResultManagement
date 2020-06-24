@@ -6,17 +6,25 @@
             
             <div class="row">
                 Name:{{ $student->name }}
+                Class:{{ $student->sclass->name }}
                 Result:
+                @foreach ($final as $key=>$value)
+                   {{ $key }}:{{ $value }} 
+                   <br>
+                   
+                @endforeach
+                Total:{{ $total }}
+
                 
-                
-                     @foreach ($resultss as $result)
-                       @foreach($result as $key => $r)
-                       {{ $key }}:{{ $result[$key] }}
-                       @endforeach
-                     @endforeach
+                   
                
                  
               
+            </div>
+            <div class="row">
+                @foreach ($subjects as $subject)
+                   {{ $subject->name }}
+                @endforeach
             </div>
         </div>
     </div>

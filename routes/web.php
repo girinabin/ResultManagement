@@ -38,6 +38,14 @@ Route::post('/student/delete/{student}','StudentController@destroy')->name('dele
 Route::post('/import/students/{class}','StudentController@importExcel')->name('import.student');
 Route::get('/student/view/{student}','StudentController@show')->name('student.show');
 
+// SUBJECT
+Route::get('/subject/{class}','SubjectController@index')->name('subject.index');
+Route::get('/subject-create/{class}','SubjectController@create')->name('subject.create');
+Route::post('subject/{class}','SubjectController@store')->name('subject.store');
+Route::get('/subject-edit/{subject}','SubjectController@edit')->name('subject.edit');
+Route::post('/subject/update/{subject}','SubjectController@update')->name('subject.update');
+Route::delete('/subject/delete/{id}','SubjectController@destroy')->name('subject.destroy');
+
 // Student Result
 Route::post('/import/result/{class}','ResultController@importResult')->name('import.result');
 
