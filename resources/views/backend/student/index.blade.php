@@ -97,9 +97,15 @@
 
                                                     <form action="{{ route('student.show',$student->id) }}">
                                                         @csrf
-                                                        <button type="submit" class="mt-2  mb-2  dropdown-item"
+                                                       @if(in_array($student->symbol_no,$symbol))
+                                                       <button type="submit" class="mt-2  mb-2  dropdown-item"
                                                             title="Delete"><i
                                                                 class="fas fa-eye  btn-warning btn-sm">&nbsp;View</i></button>
+                                                       @else
+                                                       @endif
+                                                           
+                                                          
+                                                        
                                                     </form>
 
 

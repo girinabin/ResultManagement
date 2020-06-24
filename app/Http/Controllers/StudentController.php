@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Result;
 use App\SchoolClass;
 use App\Student;
 use Illuminate\Http\Request;
@@ -58,8 +59,16 @@ class StudentController extends Controller
      */
     public function index(SchoolClass $class)
     {
+        $results = Result::all();
+        foreach($results as $r){
+            foreach($r->studentresults as $sym){
+                $symbol[]=$sym['SymbolNo'];
+            }
+        }
+        // dd($symbol);
         $students = Student::where('class_id',$class->id)->get();
-        return view('backend.student.index',compact('class','students'));
+        
+        return view('backend.student.index',compact('class','students','results','symbol'));
     }
 
     /**
@@ -82,7 +91,7 @@ class StudentController extends Controller
     {
         $data = $request->validate([
             'batch'=>'required|numeric',
-            'symbol_no'=>'required|numeric|unique:students',
+            'symbol_no'=>'required|unique:students',
             'name'=>'required',
             'father_name'=>'required',
             'dob'=>'required'
@@ -107,6 +116,7 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $subjects = $student->sclass->subjects;
+        // dd($subjects);
         
 
         $marks = $student->sclass->results;
@@ -115,21 +125,61 @@ class StudentController extends Controller
                 $marks = $mark->studentresults;
             }
         }
+        // dd($marks);
         $final = $marks[0];
         unset($final['SymbolNo']);
 
         
         
         $total = 0;
-        // $total +=$final
+        
         foreach($final as $key=>$f)
         {
             $total +=$f;
         }
         // dd($total);
+
+        foreach($subjects as $key=>$subject){
+            foreach($final as $index=>$f){
+                if(strtolower($subject->name)==strtolower($index)){
+                    $avalue[]=$subject;
+                    $bkeys[]=$f;
+                }
+            }
+        }
+
+
+        $newArray = array_map(null,$bkeys,$avalue);
+        // dd($newArray);
+
+        
+         
+       
+        
+        // dd($d);
+        // $c=array_flip($b);
+        // dd($c);
+        // $d=array_combine($a,$b);
+        // dd($d);
+        // $f =  array_keys($d);
+        // dd($f);
+        
+        // dd($c);
+        // dd($b,$a);
+        // $c = array_combine($b,$a);
+
+        // dd($f[0]);
+    //    dd(json_decode($f),true) ;
+        // dd($c);
+        
+        
     
        
-        return view('backend.student.show',compact('student','final','total','subjects'));
+        return view('backend.student.show',compact('student','final','total','subjects','newArray'));
+    }
+
+     function afun($m,$n){
+        return ($m);
     }
 
     /**

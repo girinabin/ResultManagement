@@ -34,12 +34,11 @@ class ResultController extends Controller
                 $excelcount = count($keys)-1;
                 $collections = $collections->all();
                 // dd(count($keys));
-                dd($subjectcount,$excelcount);
-                dd( $subjectcount == $excelcount-1);
+                // dd($subjectcount,$excelcount);
+                // dd( $subjectcount == $excelcount-1);
                 
-                if($checkcollection[0][0]=="SymbolNo" && $subjectcount==$excelcount-1)
+                if($checkcollection[0][0]=="SymbolNo" && $subjectcount==$excelcount)
                 {
-                    dd('here');
                     
                     foreach($collections as $key=>$collection){
                         

@@ -110,7 +110,7 @@ class SubjectController extends Controller
          Subject::where(['id'=>$subject->id,'class_id'=>$subject->class_id])->update($postData);
 
 
-        return redirect()->route('subject.index',$subject->id)->with('success_message', 'Subject Updated Successfully');
+        return redirect()->route('subject.index',$subject->class->id)->with('success_message', 'Subject Updated Successfully');
     }
 
     /**
