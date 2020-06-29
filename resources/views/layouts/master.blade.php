@@ -35,7 +35,7 @@
 <script type="application/javascript">
 	$(document).ready(function(){
 		$('.backlink').click(function(){
-			parent.history.back();
+			window.history.back();
 		});
 	});
 </script>

@@ -33,9 +33,7 @@ class ResultController extends Controller
                 $keys = $collections->shift();
                 $excelcount = count($keys)-1;
                 $collections = $collections->all();
-                // dd(count($keys));
-                // dd($subjectcount,$excelcount);
-                // dd( $subjectcount == $excelcount-1);
+               
                 
                 if($checkcollection[0][0]=="SymbolNo" && $subjectcount==$excelcount)
                 {

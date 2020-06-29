@@ -29,8 +29,7 @@
 
                                     <button type="submit" class="btn btn-sm badge-info">Import Marks</button>
                                 </form>
-                                <a href="{{ asset('uploads/sample/students.xlsx') }}" class="float-right">Download
-                                    {{ ucfirst($class->name) }} Marks Sample</a>
+                                
                             </div>
                             
 
@@ -97,11 +96,13 @@
 
                                                     <form action="{{ route('student.show',$student->id) }}">
                                                         @csrf
+                                                        @if(isset($symbol))
                                                        @if(in_array($student->symbol_no,$symbol))
                                                        <button type="submit" class="mt-2  mb-2  dropdown-item"
                                                             title="Delete"><i
                                                                 class="fas fa-eye  btn-warning btn-sm">&nbsp;View</i></button>
                                                        @else
+                                                       @endif
                                                        @endif
                                                            
                                                           

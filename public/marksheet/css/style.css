@@ -1,0 +1,399 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+body, html{
+	font-family: 'Open Sans', sans-serif;
+
+}
+
+/*LOGIN CSS*/
+.logincontainer{
+	height: 500px;
+	width:600px;
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
+.logo{
+	background-color: #0169A6;
+}
+.logoimg img{
+	height: 100px;
+	width:120px;
+}
+.school-name h1{
+	font-size: 30px;
+	color: #fff;
+
+}
+.form-control::placeholder{
+		color: #0169A6;
+	}
+
+.logtitle{
+	text-align: center;
+	text-transform: capitalize;
+	color: #0169A6;
+}
+.ico{
+	position: absolute;
+	bottom: 5%;
+	right:3%;
+	color: #0169A6;
+}
+.logbtn a{
+	padding: 5px 20px;
+	border:1px solid #0169A6;
+
+	background-color: #0169A6;
+	color: #fff;
+	border-radius: 25px;
+}
+.logbtn a:hover{
+	padding: 5px 20px;
+	background-color: #fff;
+	color: #0169A6;
+	text-decoration: none;
+	border:1px solid #0169A6;
+	transition: 0.5s ease;
+	}
+.fgtpwd{
+	color: #0169A6;
+}
+.loginfooter{
+	background-color: #0169A6;
+}
+.loginfooter ul li{
+	color: #fff;
+	list-style: none;
+}
+
+.loginfooter ul{
+	margin-top: px;
+	margin-bottom: -2px;
+}
+/*LOGIN CSS ENDS*/
+
+/*RESULT CSS */
+.resultcontainerfluid{
+	background-color: #000;
+}
+	.resultcontainer{
+		height: 100vh;
+		width:700px;
+		position: absolute;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+	}
+	.resultpaper{
+		margin:8px 8px 8px 8px;
+		 outline: 3px solid #000;
+		border:3px solid #847f7f;
+
+	}
+	.letterhead{
+		padding-top:10px;
+		padding-left: 20px;
+	}
+	.school-title{
+		text-align: center;
+		justify-content: center;
+
+	}
+	.school-title li{
+		font-size: 20px;
+		text-align: center;
+		list-style: none;
+		font-weight: 800;
+	}
+	.school-title li:nth-child(odd){
+		color: #0169A6;
+	}
+	.school-title li:nth-child(even){
+		color: #A24E47;
+	}
+	.school-result-logo img{
+		height: 100px;
+		width:120px;
+		display: inline-block;
+	}
+	.gradetitle{
+		text-align: center;
+	}
+	.gradetitle h1{
+		text-align: center;
+		font-weight: 700;
+		font-size: 30px;
+		color: #0169A6;
+
+	}
+	.content-fill{
+		padding: 10px;
+	}
+	.content-fill p{
+		line-height: 30px;
+		text-align: justify;
+		color: #2b327f;
+		font-weight: 600;
+	}
+	.fill-content-name{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		text-transform: capitalize;
+		text-align: center;
+		margin: 0px 10px;
+		font-weight:800;
+	}
+	.fill-content-dob{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		width:100px;
+		position: relative;
+		text-transform: capitalize;
+		text-align: left;
+		margin: 0px 5px;
+		font-weight:800;
+	}
+	.fill-content-rollno{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		width:40px;
+		position: relative;
+		text-transform: capitalize;
+		text-align: left;
+		margin: 0px 10px;
+		font-weight:800;
+	}
+	.fill-content-grade{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		width:60px;
+		position: relative;
+		text-transform: capitalize;
+		text-align: left;
+		margin: 0px 10px;
+		font-weight:800;
+	}
+	.fill-content-school-name{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		width:220px;
+		position: relative;
+		text-transform: capitalize;
+		text-align: left;
+		margin: 0px 10px;
+		font-weight:800;
+	}
+	.fill-content-school-location{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		width:100px;
+		position: relative;
+		text-transform: capitalize;
+		text-align: left;
+		margin: 0px 10px;
+		font-weight:800;
+	}
+	.fill-content-school-province{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		width:60px;
+		position: relative;
+		text-transform: capitalize;
+		text-align: left;
+		margin: 0px 10px;
+		font-weight:800;
+	}
+	.fill-content-exam{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		width:60px;
+		position: relative;
+		text-transform: capitalize;
+		text-align: left;
+		margin: 0px 10px;
+		font-weight:800;
+	}
+	.fill-content-exam-year{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 2px dashed;
+		width:80px;
+		position: relative;
+		text-transform: capitalize;
+		text-align: left;
+		margin: 0px 10px;
+		font-weight:800;
+	}
+	.school-stamp{
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.school-stamp img{
+		padding-top: 30px;
+		opacity: 0.06;
+		height: 660px;
+		width:100%;
+	}
+	.marksheet-table{
+		height: 680px;
+	}
+	td{
+		font-weight: 800;
+		font-style: italic;
+	}
+	.result-index{
+		margin-top: 60px;
+		color: #2b327f;
+		font-weight: 600;
+
+	}
+	.result-index ul li{
+		list-style: none;
+
+	}
+	.authority li{
+		list-style: none;
+		color: #2b327f;
+		font-weight: 600;
+	}
+	.fill-content-issue-date{
+		border:none;
+		font-weight: 600;
+	}
+	.fill-content-checkedby{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 1px dotted;
+		text-align: right;
+
+	}
+	.fill-content-signature{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 1px dotted;
+		text-align: right;
+	}
+
+
+
+/*RESULT CSS ENDS*/
+
+
+/*Student profile page Css*/
+	.stdpfcontainerfluid{
+	background-color: #000;
+}
+	.stdpfcontainer{
+		height: 100vh;
+		width:1000px;
+		position: absolute;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+	}
+	.firstrow{
+		border-bottom: 1px solid #c0c0c0;
+		margin: 0px 10px;
+	}
+	.studentrow{
+		margin-bottom: 20px;
+	}
+	.std-name h2{
+		color: #B4CE0F;
+	}
+	.std-name strong{
+		color: #c0c0c0;
+	}
+	.student-profile{
+		margin:8px 8px 8px 8px;
+		 outline: 3px solid #000;
+		border:3px solid #847f7f;
+	}
+	
+	.sch-logo img{
+		height: 70px;
+		width:70px;
+	}
+	.stdletterhead{
+		list-style: none;
+		text-align: center;
+	}
+	.std-year h5{
+		margin:10px 10px 10px 0px;
+		border:1px solid #B4CE0F;
+		border-left: none;
+		border-right: none;
+		text-align: center;
+		font-weight: 600;
+		color: #B4CE0F;
+	}
+	.std-img img{
+		height: 250px;
+		width:250px;
+	}
+	.std-det-col ul{
+		padding: 0;
+		margin:0;
+		list-style: none;
+
+	}
+
+	.grade ul li:first-child{
+		color: #7f7f7e;
+	}
+	.grade ul li:nth-child(2){
+		color: #000;
+		font-weight: 600;
+	}
+	.grade ul li:nth-child(3){
+		color: #000;
+		font-weight: 600;
+	}
+	.secondrow h3{
+		border-bottom: 1px solid #c0c0c0;
+		margin: 0px 10px;
+		padding-bottom: 10px;
+		font-weight: 700;
+	}
+	.secondrow{
+		border-bottom: 1px solid #c0c0c0;
+		margin: 0px 10px;
+		padding-bottom: 20px;
+	}
+	.fathercol ul{
+		padding-left: 10px;
+		margin: 0;
+		list-style: none;
+	}
+	.mothercol ul{
+		padding: 0;
+		margin:0;
+	}
+	.mothercol ul li{
+		font-weight: 600;
+		list-style: none;
+	}
+	
+	
+
+/*Student profile page Css ends*/

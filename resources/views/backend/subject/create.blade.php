@@ -69,9 +69,9 @@
 
         function addImage(language_id) {
             html  = '<tr id="image-row' + image_row + '">';
-            html += '  <td class="text-left"><input type="text" name="subject[' + image_row + '][name]" value="" placeholder="Subject Name" class="form-control" /></td>';
-            html += '  <td class="text-left"><input type="text" name="subject[' + image_row + '][FM]" value="" placeholder="Full Marks" class="form-control" /></td>';
-            html += '  <td class="text-left"><input type="text" name="subject[' + image_row + '][PM]" value="" placeholder="Pass Marks" class="form-control" /></td>';
+            html += '  <td class="text-left"><input type="text" name="subject[' + image_row + '][name]" value="" placeholder="Subject Name" class="form-control" required /></td>';
+            html += '  <td class="text-left"><input type="text" name="subject[' + image_row + '][FM]" value="" placeholder="Full Marks" class="form-control" required /></td>';
+            html += '  <td class="text-left"><input type="text" name="subject[' + image_row + '][PM]" value="" placeholder="Pass Marks" class="form-control" required  /></td>';
 
 
             // html += '  <td class="text-left" style="width: 30%;"><input type="text" name="subject[' + image_row + '][code]" value="" placeholder="Course Code" class="form-control" /></td>';

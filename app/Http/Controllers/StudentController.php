@@ -60,15 +60,25 @@ class StudentController extends Controller
     public function index(SchoolClass $class)
     {
         $results = Result::all();
-        foreach($results as $r){
-            foreach($r->studentresults as $sym){
-                $symbol[]=$sym['SymbolNo'];
+        if(count($results)>0){
+            foreach($results as $r){
+                foreach($r->studentresults as $sym){
+                    $symbol[]=$sym['SymbolNo'];
+                }
             }
-        }
-        // dd($symbol);
-        $students = Student::where('class_id',$class->id)->get();
+            $students = Student::where('class_id',$class->id)->get();
         
-        return view('backend.student.index',compact('class','students','results','symbol'));
+            return view('backend.student.index',compact('class','students','results','symbol'));
+        }else{
+            $students = Student::where('class_id',$class->id)->get();
+        
+            return view('backend.student.index',compact('class','students','results'));
+        }
+       
+
+        
+       
+      
     }
 
     /**
@@ -116,7 +126,6 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $subjects = $student->sclass->subjects;
-        // dd($subjects);
         
 
         $marks = $student->sclass->results;
@@ -135,9 +144,16 @@ class StudentController extends Controller
         
         foreach($final as $key=>$f)
         {
-            $total +=$f;
+            $total += (int)$f;
         }
         // dd($total);
+
+        $fullmarks=0;
+        foreach($subjects as $subject)
+        {
+            $fullmarks +=(int)$subject->FM;
+        }
+        $percentage = ($total/$fullmarks)*100;
 
         foreach($subjects as $key=>$subject){
             foreach($final as $index=>$f){
@@ -150,37 +166,15 @@ class StudentController extends Controller
 
 
         $newArray = array_map(null,$bkeys,$avalue);
-        // dd($newArray);
-
         
-         
        
+        return view('backend.student.shows',compact('student','final','total','subjects','newArray','percentage'));
         
-        // dd($d);
-        // $c=array_flip($b);
-        // dd($c);
-        // $d=array_combine($a,$b);
-        // dd($d);
-        // $f =  array_keys($d);
-        // dd($f);
-        
-        // dd($c);
-        // dd($b,$a);
-        // $c = array_combine($b,$a);
-
-        // dd($f[0]);
-    //    dd(json_decode($f),true) ;
-        // dd($c);
-        
-        
-    
-       
-        return view('backend.student.show',compact('student','final','total','subjects','newArray'));
     }
 
-     function afun($m,$n){
-        return ($m);
-    }
+    //  function afun($m,$n){
+    //     return ($m);
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -226,6 +220,32 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        $results = Result::all();
+        foreach($results as $result)
+        {
+            foreach($results as $r){
+                foreach($r->studentresults as $sym){
+                    $symbol=$sym['SymbolNo'];
+                    if($symbol==$sym['SymbolNo']){
+                        
+                         DB::table('results')->whereJsonContains('studentresults', ['SymbolNo'  => $student->symbol_no])
+                        ->delete();
+                        
+                        
+                        
+   
+                    }
+
+                }
+                
+            } 
+          
+            
+        }
+
+        
+
+        
         $result = Student::where(['id'=>$student->id,'class_id'=>$student->class_id])->delete();
         if($result)
         {
