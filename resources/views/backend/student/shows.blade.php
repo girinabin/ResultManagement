@@ -1,15 +1,17 @@
 <html>
 	<head>
 		<title>Resultsheet</title>
-		<link rel="stylesheet" href="{{ asset('marksheet/css/bootstrap.min.css') }}">
+		{{-- <link rel="stylesheet" href="{{ asset('marksheet/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('marksheet/css/style.css') }}">
 		<link rel="stylesheet" href="{{ asset('marksheet/js/jquery-3.4.1.min.js') }}">
-		<link rel="stylesheet" href="{{ asset('marksheet/js/bootstrap.min.js') }}">
+        <link rel="stylesheet" href="{{ asset('marksheet/js/bootstrap.min.js') }}"> --}}
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans&subset=devanagari" rel="stylesheet">
 	</head>
 	<body>
 		<div class="container-fluid resultcontainerfluid">
 	<div class="resultcontainer">
-		<div class="box resultpaper">
+        @foreach ($studentLists as $item)
+        <div class="box resultpaper">
 			<div class="row letterhead">
 				<div class="col-md-3 text-center">
 					<div class="school-result-logo">
@@ -128,12 +130,23 @@
                 </div>
             </div>
 			
-		</div>
+        </div>
+        
+        <br>
+        @endforeach
+		
 
 	</div>
 </div>
 
 		
 
-	</body>
+    </body>
+    <style>
+        @font-face {
+            font-family: 'Noto Sans', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+        }
+    </style>
 </html>

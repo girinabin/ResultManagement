@@ -48,5 +48,7 @@ Route::delete('/subject/delete/{id}','SubjectController@destroy')->name('subject
 
 // Student Result
 Route::post('/import/result/{class}','ResultController@importResult')->name('import.result');
+// Marksheet
+Route::get('/marksheets','MarksheetController@create')->name('marksheets.create');
 
 

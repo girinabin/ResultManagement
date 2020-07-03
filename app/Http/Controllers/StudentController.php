@@ -6,6 +6,10 @@ use App\Result;
 use App\SchoolClass;
 use App\Student;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+
+
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Importer;
 
@@ -125,6 +129,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
+        $studentLists = $student->sclass->students;
         $subjects = $student->sclass->subjects;
         
 
@@ -166,9 +171,20 @@ class StudentController extends Controller
 
 
         $newArray = array_map(null,$bkeys,$avalue);
+
+
+        $pdf = PDF::loadView('backend.student.shows', compact('student','final','total','subjects','newArray','percentage','studentLists'));
+        return $pdf->download('invoice.pdf');
         
        
-        return view('backend.student.shows',compact('student','final','total','subjects','newArray','percentage'));
+        return view('backend.student.shows',compact('student','final','total','subjects','newArray','percentage','studentLists'));
+        // $html = \view('backend.student.shows', compact('student','final','total','subjects','newArray','percentage'));
+        // $html = $html->render();
+        // $mpdf= new \Mpdf\Mpdf();
+        // $mpdf->WriteHTML($html);
+        // $fileName = 'Marksheet.pdf';
+        // $mpdf->Output($fileName,'I');
+        // return view('backend.student.shows')->with(['student'=>$student,'final'=>$final,'total'=>$total,'subjects'=>$subjects,'newArray'=>$newArray,'percentage'=>$percentage]);
         
     }
 
