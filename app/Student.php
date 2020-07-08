@@ -20,4 +20,7 @@ class Student extends Model
         return $this->belongsTo(SchoolClass::class,'class_id');
     }
 
+    public function batch(){
+        return $this->belongsTo(Batch::class,'batch_id');
+    }
 }

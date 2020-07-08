@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="card-header">
 
-                            <p class="card-text text-center"><strong>Add {{ ucfirst($class->name) }} Subject </strong></p>
+                            <p class="card-text text-center"><strong>ADD CLASS {{ ucfirst($class->name) }} SUBJECT </strong></p>
                         </div>
                         <div class="card-body">
                             @if(Session::has('success_message'))
@@ -35,7 +35,7 @@
 
 
                                       <tr>
-                                        <td class="text-left">Subject Name</td>
+                                        <td class="text-left">SUBJECT NAME</td>
                                         <td class="text-left">FM</td>
                                         <td class="text-left">PM</td>
 

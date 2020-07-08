@@ -29,8 +29,13 @@
         <div class="text-center">
           <a href="#" class="text-center"><button class="btn btn-sm"><i
                 class="fas fa-unlock-alt"></i>&nbsp;<span>Password Change</span></button></a>
-          <a href="#"><button class="btn btn-sm"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Sign
-                Out</span></button></a>
+                <form action="{{ route('logout') }}" method="POST">
+                  @csrf
+                  <a href=""><button class="btn btn-sm"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Sign
+                    Out</span></button></a>
+                </form>
+               
+          
         </div>
 
       </div>

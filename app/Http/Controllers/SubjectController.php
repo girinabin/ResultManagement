@@ -9,35 +9,28 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index(SchoolClass $class)
     {
+        $this->authorize('create',Subject::class);
+        $this->authorize('creates',$class);
         $subjects = Subject::where('class_id', $class->id)->get();
         return view('backend.subject.index', compact('subjects', 'class'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create(SchoolClass $class)
     {
+        $this->authorize('create',Subject::class);
+        $this->authorize('creates',$class);
         return view('backend.subject.create', compact('class'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request, SchoolClass $class)
     {
+        $this->authorize('create',Subject::class);
+        $this->authorize('creates',$class);
 
         $postData = $request->validate(
             [
@@ -70,38 +63,19 @@ class SubjectController extends Controller
         return redirect()->route('subject.index', $class->id)->with('success_message', 'Subject Created Successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Subject $subject)
     {
+        $this->authorize('editSubject',$subject);
         
         return view('backend.subject.edit', compact('subject'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Subject $subject)
     {
+        $this->authorize('editSubject',$subject);
+
         $postData = $request->validate([
             'name' => 'required',
             'FM' => 'required|numeric',
@@ -113,15 +87,11 @@ class SubjectController extends Controller
         return redirect()->route('subject.index',$subject->class->id)->with('success_message', 'Subject Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    
+    public function destroy(Subject $subject)
     {
-        $data = Subject::where('id', $id)->delete();
+        $this->authorize('editSubject',$subject);
+        $data = Subject::where('id', $subject->id)->delete();
         if ($data) {
             return redirect()->back()->with('success_message', 'Subject Deleted!');
         }

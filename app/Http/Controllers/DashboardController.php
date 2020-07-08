@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\School;
 use App\SchoolClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Ui\Presets\React;
 
 class DashboardController extends Controller
@@ -17,8 +18,10 @@ class DashboardController extends Controller
     //        print_r($class->name);
     //    } 
         
-        $schools = School::all();
-        return view('backend.dashboard.index',compact('schools'));
+        $schools = School::orderBy('created_at','DESC')->get();
+        $classes = SchoolClass::where('user_id', Auth::user()->id)->orderBy('created_at','DESC')->get();
+        // dd($classes);
+        return view('backend.dashboard.index',compact('schools','classes'));
     }
 
     public function addClass(Request $request)
@@ -28,4 +31,6 @@ class DashboardController extends Controller
         // $school->schoolClasses()->syncWithOutDetaching($sclass);
         // return redirect()->back();
     }
+
+
 }

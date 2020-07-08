@@ -15,38 +15,14 @@
           <img src="{{ asset('img/user.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{ route('dashboard') }}" class="d-block">Admin Dashboard</a>
+          <a href="{{ route('dashboard') }}" class="d-block">{{ Auth::user()->roles->first()->name }}</a>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          {{-- <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Starter Pages
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
-            </ul>
-          </li> --}}
+          @can('index', App\User::class)
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-school"></i>
@@ -70,7 +46,41 @@
               </li>
             </ul>
           </li>
+          @endcan
+          @can('createClass', App\SchoolClass::class)
           <li class="nav-item has-treeview">
+            <a href="{{ route('create.class') }}" class="nav-link">
+              <i class="nav-icon fas fa-school"></i>
+              <p>
+                Class
+                
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                
+                <a href="{{ route('create.class') }}"
+                 class="nav-link {{url()->current()=='http://resultmanagement.test/school/class/create' ?'active':'' }} " >
+                  <i class="fas fa-eye"></i>
+                  <p>Add Class</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                
+                <a href="{{ route('index.class',Auth::user()->id) }}"
+                 class="nav-link {{url()->current()=='http://resultmanagement.test/school/class/'.Auth::user()->id ?'active':'' }} " >
+                  <i class="fas fa-eye"></i>
+                  <p>View Class</p>
+                </a>
+              </li>
+            </ul>
+            
+          </li> 
+          @endcan
+          
+          {{-- <li class="nav-item has-treeview">
             <a href="{{ route('marksheets.create') }}" class="nav-link">
               <i class="nav-icon fas fa-school"></i>
               <p>
@@ -79,7 +89,7 @@
               </p>
             </a>
             
-          </li>
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

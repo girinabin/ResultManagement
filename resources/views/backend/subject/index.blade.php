@@ -17,6 +17,9 @@
                             <a href="{{ route('subject.create',$class->id) }}">
                                 <button class="btn btn-sm badge-info"><strong>Add Subject</strong></button>
                             </a>
+                            <a href="{{ route('index.class',$class->user->id) }}">
+                                <button class="btn btn-sm badge-info float-right"><strong>View Class</strong></button>
+                            </a>
 
 
                             <p class="card-text text-center"><strong>{{ ucfirst($class->name) }} Subject List</strong></p>

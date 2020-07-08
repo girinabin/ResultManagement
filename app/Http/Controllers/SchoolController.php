@@ -4,156 +4,128 @@ namespace App\Http\Controllers;
 
 use App\School;
 use App\SchoolClass;
+use App\User;
 use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {
 
-    public function addClass(Request $request,$id)
-    {
-        
-        $data = $request->validate([
-            'name' => 'required|string'
-        ]);
-        $school = School::findOrFail($id);
-        $result = $school->classes()->create($data);
-        if($result)
-        {
-            return redirect()->back()->with('success_message','Class Created!');
-        }
-
-    }
-
-    public function updateClass(Request $request,$id)
-    {
-        
-        $request->validate([
-            'classname'=>'required|string'
-        ]);
-        
-        $data['name'] = $request->classname;
-        $class = SchoolClass::findOrFail($id);
-        
-        $result = SchoolClass::where(['id'=>$class->id,'school_id'=>$class->school->id])->update($data);
-        if($result)
-        {
-            return redirect()->back()->with('success_message','Class Updated!');
-        }
-    }
-
-    public function deleteClass($id)
-    {
-        $class = SchoolClass::findOrFail($id);
-        $result = SchoolClass::where(['id'=>$class->id,'school_id'=>$class->school->id])->delete();
-        if($result)
-        {
-            return redirect()->back()->with('success_message','Class Deleted!');
-        }
-
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+    
     public function index()
     {
+        $this->authorize('index', User::class);
         
         $schools = School::all();
         return view('backend.school.index',compact('schools'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+    
     public function create()
     {
+        $this->authorize('create',User::class);
+        
         $schools = School::all();
         return view('backend.school.create',compact('schools'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
+        $this->authorize('store', User::class);
         $data = $request->validate([
             'school_name' => 'required|string',
             'school_location' =>' required|string',
-            'principal' => 'required|string'
+            'principal' => 'required|string',
+            'school_email'=>'required|email',
+            'school_password'=>'required|string|min:8',
+            
         ]);
-        $school = School::Create($data);
-        if($school){
-            return redirect()->back()->with('success_message','School Added Successfully');
+        $user = User::Create([
+            'name'=>$data['school_name'],
+            'email'=>$data['school_email'],
+            'password'=>bcrypt($data['school_password'])
+        ]);
+        $user->roles()->create([
+            'name'=>'ADMIN'
+        ]);
+        $user->school()->create([
+            'school_name'=>$data['school_name'],
+            'school_location'=>$data['school_location'],
+            'principal'=>$data['principal'],  
+        ]);
+        
+      
+        if($user){
+            return redirect()->route('school.index')->with('success_message','School Created Successfully');
         }
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(School $school)
-    {
-        $classes = SchoolClass::where('school_id',$school->id)->get();
-
-        return view('backend.school.show',compact('school','classes'));
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(School $school)
     {
+        $this->authorize('edit',User::class);
         return view('backend.school.edit',compact('school'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, School $school)
     {
+        $this->authorize('update',User::class);
+        
         $data = $request->validate([
             'school_name'=>'required|string',
             'school_location'=>'required|string',
-            'principal'=>'required|string'
+            'principal'=>'required|string',
+            'school_email'=>'required|email'
         ]);
-        $result = School::where('id',$school->id)->update($data);
-        if($result)
+        $data['school_name'] = strtoupper($request->school_name);
+        $data['school_location'] = strtoupper($request->school_location);
+        $data['principal'] = strtoupper($request->principal);
+
+        $result = School::where('id',$school->id)->update([
+            'school_name'=>$data['school_name'],
+            'school_location'=>$data['school_location'],
+            'principal'=>$data['principal'],
+
+        ]);
+        $user = User::where('id',$school->user_id)->update([
+            'email'=>$data['school_email']
+        ]);
+        
+        if($result && $user)
         {
-            return redirect()->back()->with('success_message','School Updated!');
+            return redirect()->route('school.index')->with('success_message','School Updated!');
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   public function show(School $school){
+       
+       return view('backend.school.show',compact('school'));
+   }
     public function destroy(School $school)
     {
+        $this->authorize('destroy',User::class);
         
         $result = School::where(['id'=>$school->id])->delete();
-        if($result)
+        $user = User::where(['id'=>$school->user_id])->delete();
+        if($result && $user)
         {
             return redirect()->back()->with('success_message','School Deleted!');
         }
 
+    }
+
+    public function schoolDelete(School $school){
+        $this->authorize('destroy',User::class);
+        
+        $result = School::where(['id'=>$school->id])->delete();
+        $user = User::where(['id'=>$school->user_id])->delete();
+        if($result && $user)
+        {
+            return redirect()->route('school.index')->with('success_message','School Deleted!');
+        }
     }
 }

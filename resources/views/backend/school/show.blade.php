@@ -11,91 +11,46 @@
                     {{ Session::get('success_message')}}
                 </div>
                 @endif
-                <div class="col-md-6">
-                    <div class="card">
+                <div class="col-md-8 offset-2">
+                    <div class="card mt-1">
                         <div class="card-header">
-                            <p class="card-text text-center"><strong>{{ ucfirst($school->school_name) }}</strong></p>
+                            <a href="{{ route('school.index') }}" class="float-right">
+                                <button class="btn-sm badge-info"><strong>View School</strong></button>
+                            </a>
+                            <a href="{{ route('school.create') }}" class="float-left">
+                                <button class=" btn-sm badge-info"><strong>Add School</strong></button>
+                            </a>
+                            <div class="card-text text-center">
+                                <strong>{{ $school->school_name }}</strong>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <table class="table table-hover table-stripped">
-                                <thead>
-                                    <tr>
-                                        <th>School Name</th>
-                                        <th>School Location</th>
-                                        <th>School Principal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ ucfirst($school->school_name) }}</td>
-                                        <td>{{ ucfirst($school->school_location) }}</td>
-                                        <td>{{ ucfirst($school->principal )}}</td>
+                            <div>
+                                <strong>SCHOOL'S EMAIL : </strong>{{ $school->user->email }}
+                            </div>
+                            <div>
+                                <strong>SCHOOL'S LOCATION : </strong>{{ $school->school_location }}
+                            </div>
+                            <div>
+                                <strong>SCHOOL'S PRINCIPAL : </strong>{{ $school->principal }}
+                            </div>
+                            <div>
+                                <strong>SCHOOL'S ROLE : </strong>{{ $school->user->roles()->first()->name }}
+                            </div>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ route('school.edit',$school->id) }}"><button class="btn-sm btn-warning">Edit</button></a>
+                            <a href="{{ route('school.delete',$school->id) }}" class="float-right"><button class="btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this school({{ $school->school_name }})?')">Delete</button></a>
 
-
-
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <p class="card-text text-center"><strong>Add Classes</strong></p>
-                        </div>
-                        <div class="card-body">
-
-                            <form action="{{ route('school.class',$school->id) }}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <div class="text text-danger">{{ $errors->first('name') }}</div>
-                                    <label for="name">Class Name</label>
-                                    <input class="form-control" type="text" name="name" value="{{ old('name') }}">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Add Class</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+               
 
             </div>
-            <hr>
-            <div class="row">
-                @forelse($classes as $key => $class)
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <p class="card-text ">
-                                {{ ucfirst($class->name) }}
-
-                                <button type="button" class="btn  btn-sm" data-toggle="modal"
-                                    data-target=".bd-edit-modal-sm{{ $class->id }}"><i class="fas fa-edit"></i></button>
-
-                                <button type="button" class="btn  btn-sm float-right" data-toggle="modal"
-                                    data-target=".bd-delete-modal-sm{{ $class->id }}"><i
-                                        class="fas fa-trash"></i></button>
-
-
-
-
-                            </p>
-
-
-                        </div>
-                        <div class="card-body text-center">
-
-                            <a href="{{ route('subject.index',$class->id) }}" class="btn btn-primary btn-sm ">View
-                                Subject</a>
-                            <a href="{{ route('student.index',$class->id) }}" class="btn btn-primary btn-sm ">View
-                                Students</a>
-                        </div>
-                    </div>
-                </div>
-                @empty
-
-                @endforelse
-            </div>
+            
+            
 
 
         </div>
@@ -103,7 +58,7 @@
 </div>
 
 {{-- Edit Class Modal --}}
-@forelse ($classes as $class)
+{{-- @forelse ($classes as $class)
 <div class="modal fade bd-edit-modal-sm{{ $class->id }}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -126,10 +81,10 @@
 </div>
 @empty
 
-@endforelse
+@endforelse --}}
 
 {{-- Delete Class modal --}}
-@forelse ($classes as $class)
+{{-- @forelse ($classes as $class)
 <div class="modal fade bd-delete-modal-sm{{ $class->id }}" tabindex="-1" role="dialog"
     aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -157,6 +112,6 @@
 </div>
 @empty
 
-@endforelse
+@endforelse --}}
 
 @endsection

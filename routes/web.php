@@ -24,18 +24,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard','DashboardController@index')->name('dashboard');
 // Route::post('/addclass','DashboardController@addClass')->name('addclass');
 Route::resource('school', 'SchoolController');
+Route::get('/school/delete/{school}','SchoolController@schoolDelete')->name('school.delete');
 // CLASSES
-Route::post('/school/class/{id}','SchoolController@addClass')->name('school.class');
-Route::post('/update/class/{id}','SchoolController@updateClass')->name('update.class');
-Route::post('/class/delete/{id}','SchoolController@deleteClass')->name('delete.class');
+Route::get('/school/class/create','SchoolClassController@createClass')->name('create.class');
+Route::post('/school/class/{user}','SchoolClassController@addClass')->name('school.class');
+Route::post('/update/class/{class}','SchoolClassController@updateClass')->name('update.class');
+Route::post('/class/delete/{class}','SchoolClassController@deleteClass')->name('delete.class');
+Route::get('/school/class/{user}','SchoolClassController@indexClass')->name('index.class');
 
 // STUDENTS
 // Route::resource('student', 'SchoolController');
-Route::get('/student/{class}','StudentController@index')->name('student.index');
-Route::post('student/{class}','StudentController@store')->name('add.student');
+Route::get('/student/create/{batch}','StudentController@create')->name('student.create');
+Route::get('/student/{batch}','StudentController@index')->name('student.index');
+Route::post('student/{batch}','StudentController@store')->name('add.student');
 Route::post('/student/update/{student}','StudentController@update')->name('update.student');
 Route::post('/student/delete/{student}','StudentController@destroy')->name('delete.student');
-Route::post('/import/students/{class}','StudentController@importExcel')->name('import.student');
+Route::post('/import/students/{batch}','StudentController@importExcel')->name('import.student');
 Route::get('/student/view/{student}','StudentController@show')->name('student.show');
 
 // SUBJECT
@@ -44,7 +48,14 @@ Route::get('/subject-create/{class}','SubjectController@create')->name('subject.
 Route::post('subject/{class}','SubjectController@store')->name('subject.store');
 Route::get('/subject-edit/{subject}','SubjectController@edit')->name('subject.edit');
 Route::post('/subject/update/{subject}','SubjectController@update')->name('subject.update');
-Route::delete('/subject/delete/{id}','SubjectController@destroy')->name('subject.destroy');
+Route::delete('/subject/delete/{subject}','SubjectController@destroy')->name('subject.destroy');
+
+// Batch
+Route::get('/batch/{class}','BatchController@addBatch')->name('add.batch');
+Route::post('/batch/store/{class}','BatchController@storeBatch')->name('store.batch');
+Route::get('/batch/view/{class}','BatchController@viewBatch')->name('index.batch');
+Route::post('/batch/update/{batch}','BatchController@updateBatch')->name('update.batch');
+Route::post('/batch/delete/{batch}','BatchController@deleteBatch')->name('delete.batch');
 
 // Student Result
 Route::post('/import/result/{class}','ResultController@importResult')->name('import.result');

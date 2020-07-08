@@ -7,8 +7,7 @@
                 <div class="col-md-6 offset-3">
                     <div class="card">
                         <div class="card-header">
-                {{-- <button type="button" class="btn btn-default backlink float-right"> <i class="fa fa-backward" > </i> Back</button> --}}
-
+                            
                             <p class="card-text text-center"><strong>Edit School Details of {{ $school->school_name }}</strong></p>
                         </div>
                         <div class="card-body">
@@ -34,6 +33,11 @@
                                     <div class="text text-danger">{{ $errors->first('principal') }}</div>
                                     <label for="principal">School Principal</label>
                                     <input type="text" name="principal" id="principal" class="form-control" value="{{ $school->principal }}">
+                                </div>
+                                <div class="form-group">
+                                    <div class="text text-danger">{{ $errors->first('school_email') }}</div>
+                                    <label for="principal">School Email</label>
+                                    <input type="email" name="school_email" id="school_email" class="form-control" value="{{ $school->user->email }}">
                                 </div>
                                 <button class="btn btn-warning ">Update</button>
                             </form>

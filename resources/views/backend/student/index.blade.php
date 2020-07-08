@@ -19,12 +19,12 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-left ">
-                                <form action="{{ route('import.result',$class->id) }}" method="POST"
+                                <form action="{{ route('import.result',$batch->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <div class="text text-danger">{{ $errors->first('resultfile') }}</div>
-                                        <input type="file" name="resultfile" class="form-control">
+                                        <input type="file" name="resultfile" class="form-control" style="width: 110px;padding:2px;padding-left:12px;">
                                     </div>
 
                                     <button type="submit" class="btn btn-sm badge-info">Import Marks</button>
@@ -34,12 +34,12 @@
                             
 
                             <div class="float-right ">
-                                <form action="{{ route('import.student',$class->id) }}" method="POST"
+                                <form action="{{ route('import.student',$batch->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <div class="text text-danger">{{ $errors->first('file') }}</div>
-                                        <input type="file" name="file" class="form-control">
+                                        <input type="file" name="file" class="form-control" style="width: 110px;padding:2px;padding-left:12px;">
                                     </div>
 
                                     <button type="submit" class="btn btn-sm badge-info">Import Student</button>
@@ -48,10 +48,10 @@
                                     Student Sample</a>
                             </div>
                             <div class="text-center">
-                                <p class="card-text "><strong>{{ ucfirst($class->name) }}'s Student List</strong>
+                                <p class="card-text "><strong>CLASS {{ $batch->sclass->name }}({{$batch->batch  }})'S STUDENT LIST</strong>
                                 </p>
                                 <button type="button" class="btn btn-sm badge-info " data-toggle="modal"
-                                    data-target=".bd-student-modal-lg{{ $class->id }}">Add Student</button>
+                                    data-target=".bd-student-modal-lg{{ $batch->id }}">Add Student</button>
                             </div>
                             
                         </div>
@@ -72,7 +72,7 @@
                                 <tbody>
                                     @forelse ($students as $student)
                                     <tr>
-                                        <td>{{ $student->batch }}</td>
+                                        <td>{{ $batch->batch }}</td>
                                         <td>{{ $student->symbol_no }}</td>
                                         <td>{{ ucfirst($student->name) }}</td>
                                         <td>{{ ucfirst($student->father_name) }}</td>
@@ -142,18 +142,14 @@
 </div>
 
 {{-- STUDENT ADD MODAL --}}
-<div class="modal fade bd-student-modal-lg{{ $class->id }}" tabindex="-1" role="dialog"
+<div class="modal fade bd-student-modal-lg{{ $batch->id }}" tabindex="-1" role="dialog"
     aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="container mt-2 mb-2">
-                <form action="{{ route('add.student',$class->id) }}" method="POST">
+                <form action="{{ route('add.student',$batch->id) }}" method="POST">
                     @csrf
-                    <div class="form-group">
-                        <div class="text text-danger">{{ $errors->first('batch') }}</div>
-                        <label for="batch">Batch/Year</label>
-                        <input type="text" name="batch" id="batch" class="form-control" value="{{ old('batch') }}">
-                    </div>
+                    
                     <div class="form-group">
                         <div class="text text-danger">{{ $errors->first('symbol_no') }}</div>
                         <label for="symbol_no">Symbol Number</label>
@@ -193,11 +189,7 @@
             <div class="container mt-2 mb-2">
                 <form action="{{ route('update.student',$student->id) }}" method="POST">
                     @csrf
-                    <div class="form-group">
-                        <div class="text text-danger">{{ $errors->first('batch') }}</div>
-                        <label for="batch">Batch/Year</label>
-                        <input type="text" name="batch" id="batch" class="form-control" value="{{ $student->batch }}">
-                    </div>
+                    
                     <div class="form-group">
                         <div class="text text-danger">{{ $errors->first('symbol_no') }}</div>
                         <label for="symbol_no">Symbol Number</label>
@@ -218,7 +210,7 @@
                     <div class="form-group">
                         <div class="text text-danger">{{ $errors->first('dob') }}</div>
                         <label for="dob">Date of Birth</label>
-                        <input type="date" name="dob" id="dob" class="form-control" value="{{ $student->dob }}">
+                        <input type="text" name="dob" id="dob" class="form-control" value="{{ $student->dob }}">
                     </div>
                     <button type="submit" class="btn btn-warning ">Update</button>
                 </form>

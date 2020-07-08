@@ -8,7 +8,9 @@
                 <div class="col-md-6 offset-3">
                     <div class="card">
                         <div class="card-header">
-                {{-- <button type="button" class="btn btn-default backlink float-right"> <i class="fa fa-backward" > </i> Back</button> --}}
+                            <a href="{{ route('school.index') }}">
+                                <button class="btn btn-sm badge-info"><strong>View School</strong></button>
+                            </a>
 
                             <p class="card-text text-center"><strong>Add School Details</strong></p>
                         </div>
@@ -34,6 +36,16 @@
                                     <div class="text text-danger">{{ $errors->first('principal') }}</div>
                                     <label for="principal">School Principal</label>
                                     <input type="text" name="principal" id="principal" class="form-control" value="{{ old('principal') }}">
+                                </div>
+                                <div class="form-group">
+                                    <div class="text text-danger">{{ $errors->first('school_email') }}</div>
+                                    <label for="school_name">School Email</label>
+                                    <input type="email" name="school_email" id="school_email" class="form-control" value="{{ old('school_email') }}">
+                                </div>
+                                <div class="form-group">
+                                    <div class="text text-danger">{{ $errors->first('school_password') }}</div>
+                                    <label for="school_name">School Password</label>
+                                    <input type="password" name="school_password" id="school_password" class="form-control" value="{{ old('school_password') }}">
                                 </div>
                                 <button class="btn btn-primary ">Save</button>
                             </form>

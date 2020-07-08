@@ -15,9 +15,11 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->index();
             $table->string('school_name');
             $table->string('school_location');
             $table->string('principal');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

@@ -16,13 +16,13 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('class_id')->index();
-            $table->integer('batch');
-            $table->string('symbol_no')->unique();
+            $table->unsignedBigInteger('batch_id');
+            $table->string('symbol_no');
             $table->string('name');
             $table->string('father_name');
             $table->string('dob');
             $table->foreign('class_id')->references('id')->on('school_classes')->onDelete('CASCADE');
-            
+            $table->foreign('batch_id')->references(('id'))->on('batches')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

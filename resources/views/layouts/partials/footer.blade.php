@@ -5,5 +5,5 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; {{ date('Y') }} <a href="https://speedupcoders.com">SpeedUp Coders</a>.</strong> All rights reserved.
   </footer>
